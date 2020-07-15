@@ -17,20 +17,70 @@ class BSTNode:
 
     # Insert the given value into the tree
     def insert(self, value):
-        pass
+        # Case 1: value is less then self.value
+        if value < self.value:
+            # If there is no left child, insert here
+            if self.left is None:
+                self.left = BSTNode(value)
+            # Else 
+            else:
+                # repeat the process on left subtree
+                self.left.insert(value)
+
+        # Case 2: value is greater than or equal self.value
+        if value >= self.value:
+            if self.right is None:
+                self.right = BSTNode(value)
+            else:
+                self.right.insert(value)
+        
+
+
 
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
-        pass
+        
+        # Case 1: self.value is equal to the target
+        if self.value == target:
+            return True
+        # Case 2: if target is less then self.value
+        if target < self.value:
+            # If self.left is None, it isnt in the tree
+            if self.left is None:
+                return False
+            else:
+                return self.left.contains(target)
+        # Case 3: otherwise
+        if target > self.value:
+            if self.right is None:
+                return False
+            else:
+                return self.right.contains(target)
+
+
 
     # Return the maximum value found in the tree
     def get_max(self):
-        pass
+        # Forget about the left subtree
+        # Iterate through the nodes using a loop construct
+        if not self.right:
+            return self.value
+        else:
+            return self.right.get_max()
+             
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
-        pass
+        # recursive solution
+        fn(self.value)
+        if self.left:
+            self.left.for_each(fn)
+        if self.right:
+            self.right.for_each(fn)
+    
+
+
 
     # Part 2 -----------------------
 
