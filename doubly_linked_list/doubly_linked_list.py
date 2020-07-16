@@ -195,32 +195,38 @@ class DoublyLinkedList:
     List and inserts it as the new tail node of the List.
     """
     def move_to_end(self, node):
-        current = self.head
-        while current != node:
-            current = current.next
-        if current.prev:
-            before = current.prev
-            before.next = current.next
-            if node == self.tail:
-                self.tail = before
-        if current.next:
-            after = current.next
-            after.prev = current.prev
-            if node is self.head:
-                self.head = after
+        """ First try """
+        # current = self.head
+        # while current != node:
+        #     current = current.next
+        # if current.prev:
+        #     before = current.prev
+        #     before.next = current.next
+        #     if node == self.tail:
+        #         self.tail = before
+        # if current.next:
+        #     after = current.next
+        #     after.prev = current.prev
+        #     if node is self.head:
+        #         self.head = after
 
-        prev_tail = self.tail
-        prev_tail.next = current
-        current.prev = prev_tail
-        current.next = None
-        self.tail = current
+        # prev_tail = self.tail
+        # prev_tail.next = current
+        # current.prev = prev_tail
+        # current.next = None
+        # self.tail = current
 
-        # if node is self.tail:
-        #     return
-        # value = node.value
-        # if node is self.head:
-        #     self.remove_from_head()
-        #     self.add_to_tail
+        if node is self.tail:
+            return
+        value = node.value
+        if node is self.head:
+            self.remove_from_head()
+            self.add_to_tail(value)
+        else:
+            node.delete()
+            self.length -= 1
+            self.add_to_tail(value)
+
 
     """
     Deletes the input node from the List, preserving the 
